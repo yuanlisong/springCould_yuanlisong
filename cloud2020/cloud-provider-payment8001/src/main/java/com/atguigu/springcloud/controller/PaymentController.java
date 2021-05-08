@@ -44,6 +44,9 @@ public class PaymentController {
 	@GetMapping(value = "/payment/get/{id}")
 	public CommonResult<Payment> getPaymentId(@PathVariable("id") Long id) {
 		Payment payment = paymentService.getPaymentId(id);
+		if (payment == null) {
+			return new CommonResult(200, "ok,访问服务端口：" + serverPort, "数据不存在");
+		}
 		CommonResult<Payment> commonResult = new CommonResult<>();
 		commonResult.setCode(200);
 		commonResult.setMessage("ok,访问服务端口：" + serverPort);
